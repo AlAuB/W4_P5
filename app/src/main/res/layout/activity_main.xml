@@ -11,7 +11,8 @@
         android:id="@+id/fragmentFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game"
+        />
 
     <TextView
         android:id="@+id/message"
