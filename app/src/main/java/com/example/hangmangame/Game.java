@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,12 +100,12 @@ public class Game extends Fragment {
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             textView.setText(content);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                    (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+              (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(10, 10, 10, 10);
             textView.setLayoutParams(params);
             linearLayout.addView(textView);
         }
-        System.out.println("Word: " + currentWord);
+        Log.d("Word: ", currentWord);
     }
 
     private int getRandomNumber(int max) {
