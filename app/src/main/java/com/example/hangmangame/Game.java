@@ -16,8 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import org.w3c.dom.Text;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Game#newInstance} factory method to
@@ -25,7 +23,6 @@ import org.w3c.dom.Text;
  */
 public class Game extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -44,7 +41,6 @@ public class Game extends Fragment {
     LinearLayout linearLayout;
     ImageView imageView;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -78,8 +74,7 @@ public class Game extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        if(savedInstanceState != null){
-            getRetainInstance();
+        if (savedInstanceState != null) {
             currentWord = savedInstanceState.getString("word");
             count = savedInstanceState.getInt("count");
             correct = savedInstanceState.getInt("count");
@@ -88,10 +83,10 @@ public class Game extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if(savedInstanceState ==null){
+        if (savedInstanceState == null) {
             view = inflater.inflate(R.layout.fragment_game, container, false);
             imageView = view.findViewById(R.id.progress);
             linearLayout = view.findViewById(R.id.words);
@@ -154,7 +149,7 @@ public class Game extends Fragment {
         }
     }
 
-    public void drawHangman(int chance){
+    public void drawHangman(int chance) {
         count++;
         switch (count) {
             case 1:
@@ -206,7 +201,7 @@ public class Game extends Fragment {
         outState.putString("word", currentWord);
         outState.putString("hint", hint);
         outState.putInt("count", count);
-        outState.putInt("correct",correct);
+        outState.putInt("correct", correct);
         super.onSaveInstanceState(outState);
     }
 

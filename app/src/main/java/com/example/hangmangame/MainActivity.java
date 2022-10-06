@@ -1,28 +1,21 @@
 package com.example.hangmangame;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Game.gameListener {
 
@@ -52,29 +45,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             hint = setButton(R.id.hint);
         }
 
-        //Log.d("SAVED STATE ", String.valueOf(savedInstanceState==null));
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             game = new Game();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragmentFrame, game, "myFragment")
                     .setReorderingAllowed(true)
-//                    .addToBackStack("save")
                     .commit();
             inactive = new ArrayList<>();
 
-        }
-        else{
+        } else {
             game = (Game) getSupportFragmentManager()
                     .findFragmentByTag("myFragment");
             inactive = (ArrayList<Button>) getLastCustomNonConfigurationInstance();
-            for (int i=0; i<inactive.size(); i++){
-//                Log.d("TYPE", String.valueOf(inactive.get(i).getId()));
+            for (int i = 0; i < inactive.size(); i++) {
                 findViewById(inactive.get(i).getId()).setEnabled(false);
             }
         }
         restart = setButton(R.id.restart);
-        allButtons=new ArrayList<Button>();
-        allButtons.addAll(Arrays.asList(q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m));
+        allButtons = new ArrayList<>();
+        allButtons.addAll(Arrays.asList(q, w, e, r, t, y, u, i, o, p, a, s, d, f, g, h, j, k, l, z, x, c, v, b, n, m));
     }
 
     private Button setButton(int id) {
@@ -83,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return button;
     }
 
-    private void setAllButtons(){
+    private void setAllButtons() {
         q = setButton(R.id.q);
         w = setButton(R.id.w);
         e = setButton(R.id.e);
@@ -124,11 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (buttonText.equals("New Game")) {
             game.newGame();
-//            for (int i = 0; i < inactive.size(); i++) {
-//                inactive.get(i).setEnabled(true);
-//            }
             buttonsControl(true);
-            inactive.removeAll(inactive);
+            inactive.clear();
 
             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 giveHint.setText("");
@@ -141,18 +127,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //if count <= game.chance then we can get hint, otherwise
             //if count = game.chance - 1, (player only has one life left) toast= “Hint not available”
 
-            if(numHint>0 && game.count == game.chance - 1){
+            if (numHint > 0 && game.count == game.chance - 1) {
                 Toast.makeText(this, "Hint not available", Toast.LENGTH_SHORT).show();
-            }
-            else if(numHint == 3){
+            } else if (numHint == 3) {
                 Toast.makeText(this, "No more hints", Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 if (numHint == 0) {
                     giveHint.setText(game.hint);
                     numHint++;
-                }
-                else if (numHint == 1) {
+                } else if (numHint == 1) {
                     //The second time it is clicked it
                     // disables half of the remaining letters (that are not part of the word)
                     // costs the user a turn
@@ -160,13 +143,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     giveHint.setText(game.hint);
 
                     int iKeys = 0; //keeps track of index in allButtons array
-                    int half = (26 - inactive.size())/2; //half of the remaining letters
+                    int half = (26 - inactive.size()) / 2; //half of the remaining letters
                     Log.d("numKeysInactive", String.valueOf(inactive.size()));
                     Log.d("half left", String.valueOf(half));
                     int i = half;
-                    while(i > 0){
+                    while (i > 0) {
                         String btnVal = allButtons.get(iKeys).getText().toString();
-                        if(!inactive.contains(allButtons.get(iKeys)) && !game.currentWord.contains(btnVal)){
+                        if (!inactive.contains(allButtons.get(iKeys)) && !game.currentWord.contains(btnVal)) {
                             //if the key is still active, and the letter is not in the word
                             allButtons.get(iKeys).setEnabled(false);
                             inactive.add(allButtons.get(iKeys));
@@ -175,25 +158,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         iKeys++;
                     }
                     game.drawHangman(game.chance);
-                }
-                else if (numHint == 2) {
+                } else if (numHint == 2) {
                     //The third time it is clicked, it shows all the vowels, BUT it costs the user a turn.
                     //Be sure to disable all the vowel buttons so they user doesn’t click them again.
                     numHint++;
                     giveHint.setText(game.hint);
-
-                    ArrayList<String> vowels = new ArrayList<String>();
-                    vowels.addAll(Arrays.asList("a", "e", "i", "o", "u"));
-                    Log.d("vowel List", vowels.toString());
-
-                    for (int i = 0; i <allButtons.size(); i++){
-                        String letter =  allButtons.get(i).getText().toString();
-                        Log.d("test", "Look here");
+                    ArrayList<String> vowels = new ArrayList<>(Arrays.asList("a", "e", "i", "o", "u"));
+                    for (int i = 0; i < allButtons.size(); i++) {
+                        String letter = allButtons.get(i).getText().toString();
                         //iterate through all the letters
                         //if not inactive, and is a vowel in the word, place in the guessed word and disable the key
-                        if(!inactive.contains(allButtons.get(i)) && vowels.contains(letter) && game.currentWord.contains(letter)){
+                        if (!inactive.contains(allButtons.get(i)) && vowels.contains(letter) && game.currentWord.contains(letter)) {
                             game.mainActivityButtonInput(letter);
-                            Log.d("Vowel Input", allButtons.get(i).getText().toString());
                             allButtons.get(i).setEnabled(false);
                             inactive.add(allButtons.get(i));
                         }
@@ -214,10 +190,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void buttonsControl(boolean status) {
         for (int i = 0; i < allButtons.size(); i++) {
-            if(status){
-                allButtons.get(i).setEnabled(status);
-            }
-            else{
+            if (status) {
+                allButtons.get(i).setEnabled(true);
+            } else {
                 findViewById(allButtons.get(i).getId()).setEnabled(false);
                 inactive.add(allButtons.get(i));
             }
