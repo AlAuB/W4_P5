@@ -85,4 +85,26 @@ In `MainActivity.java` 's `onCreate()`
     
    ```
 
+   ## To save state of the Inactive Keys array `ArrayList<Button> inactive;` when changing orientation
+   In `MainActivity.java`
+    ```java
+    @Nullable
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return inactive;
+    }
    
+   `onCreate()` 
+   ```java
+   if(savedInstanceState == null){
+     //initialize views and fragment
+     //[...]
+   }
+   else {
+      //[...]
+      inactive = (ArrayList<Button>) getLastCustomNonConfigurationInstance();
+      for (int i=0; i<inactive.size(); i++){
+          findViewById(inactive.get(i).getId()).setEnabled(false);
+      }
+   }
+   ```
