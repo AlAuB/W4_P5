@@ -64,9 +64,9 @@ The `Fragment` has ImageView, and TextView.
    ```
 
 ## How to save state of Fragment
-When changing orientation, to save the state of the fragment, we use setRetainInstance(true);
+When changing orientation, to save the state of the fragment, we use the fragment's setRetainInstance(true);
 
-In `Game.java`
+In the fragment `Game.java`
    ```java
     @Override
     public void onCreate(Bundle savedInstanceState) {
