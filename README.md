@@ -63,4 +63,54 @@ The `Fragment` has ImageView, and TextView.
    }
    ```
 
+## How to save state of Fragment
+When changing orientation, to save the state of the fragment, we use the fragment's setRetainInstance(true);
+
+In the fragment `Game.java`
+   ```java
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+   ```
    
+In `MainActivity.java` 's `onCreate()` 
+   ```java
+   if(savedInstanceState == null){
+     //initialize views and fragment
+   }
+   else {
+     game = (Game) getSupportFragmentManager().findFragmentByTag("myFragment");
+   }
+    
+   ```
+
+## To save state of the Inactive Keys when changing orientation
+Inactive keys: `ArrayList<Button> inactive;`
+
+Because this is an ArrayList of Buttons, we cannot just simply pass it into a Bundle to save.
+
+In `MainActivity.java`
+
+    ```java
+    @Nullable
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return inactive;
+    }
+    ```
+
+In `onCreate()` 
+   ```java
+   if(savedInstanceState == null){
+     //initialize views and fragment
+     //[...]
+   }
+   else {
+      //[...]
+      inactive = (ArrayList<Button>) getLastCustomNonConfigurationInstance();
+      for (int i=0; i<inactive.size(); i++){
+          findViewById(inactive.get(i).getId()).setEnabled(false);
+      }
+   }
+   ```
