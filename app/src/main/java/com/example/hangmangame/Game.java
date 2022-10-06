@@ -75,10 +75,7 @@ public class Game extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         if (savedInstanceState != null) {
-            currentWord = savedInstanceState.getString("word");
-            count = savedInstanceState.getInt("count");
-            correct = savedInstanceState.getInt("count");
-            hint = savedInstanceState.getString("hint");
+            getRetainInstance();
         }
     }
 
@@ -194,15 +191,6 @@ public class Game extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString("word", currentWord);
-        outState.putString("hint", hint);
-        outState.putInt("count", count);
-        outState.putInt("correct", correct);
-        super.onSaveInstanceState(outState);
     }
 
 }
