@@ -73,7 +73,7 @@ In the fragment `Game.java`
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
    ```
-   
+
 In `MainActivity.java` 's `onCreate()` 
    ```java
    if(savedInstanceState == null){
@@ -92,13 +92,13 @@ Because this is an ArrayList of Buttons, we cannot just simply pass it into a Bu
 
 In `MainActivity.java`
 
-    ```java
-    @Nullable
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        return inactive;
-    }
-    ```
+```java
+@Nullable
+@Override
+public Object onRetainCustomNonConfigurationInstance() {
+    return inactive;
+}
+```
 
 In `onCreate()` 
    ```java
