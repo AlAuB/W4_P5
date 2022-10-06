@@ -87,15 +87,18 @@ In `MainActivity.java` 's `onCreate()`
 
 ## To save state of the Inactive Keys when changing orientation
 Inactive keys: `ArrayList<Button> inactive;`
+
 Because this is an ArrayList of Buttons, we cannot just simply pass it into a Bundle to save.
 
 In `MainActivity.java`
+
     ```java
     @Nullable
     @Override
     public Object onRetainCustomNonConfigurationInstance() {
         return inactive;
-    }```
+    }
+    ```
 
 In `onCreate()` 
    ```java
