@@ -27,15 +27,17 @@
 
     <TableLayout
         android:id="@+id/keyboard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/message">
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
 
         <TableRow
             android:id="@+id/first"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center_vertical">
 
             <Button
                 android:id="@+id/q"
@@ -77,6 +79,14 @@
                 android:minWidth="10dp"
                 android:text="t" />
 
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
             <Button
                 android:id="@+id/y"
                 android:layout_width="wrap_content"
@@ -108,13 +118,6 @@
                 android:layout_margin="1dp"
                 android:minWidth="10dp"
                 android:text="o" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/a"
@@ -123,6 +126,14 @@
                 android:layout_margin="1dp"
                 android:minWidth="10dp"
                 android:text="a" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/third"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
 
             <Button
                 android:id="@+id/s"
@@ -164,6 +175,14 @@
                 android:minWidth="10dp"
                 android:text="h" />
 
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
             <Button
                 android:id="@+id/j"
                 android:layout_width="wrap_content"
@@ -187,13 +206,6 @@
                 android:layout_margin="1dp"
                 android:minWidth="10dp"
                 android:text="l" />
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/third"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/z"
@@ -210,6 +222,13 @@
                 android:layout_margin="1dp"
                 android:minWidth="10dp"
                 android:text="x" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/fifth"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <Button
                 android:id="@+id/c"
@@ -259,8 +278,8 @@
                 android:minWidth="10dp"
                 android:text="p" />
         </TableRow>
-    </TableLayout>
 
+    </TableLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

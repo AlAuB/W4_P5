@@ -6,4 +6,5 @@
     <string name="choose_a_letter">CHOOSE A LETTER</string>
     <string name="restart_the_game">Restart the game</string>
     <string name="new_game">New Game</string>
+    <string name="hint">Hint</string>
 </resources>
